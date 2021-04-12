@@ -1,7 +1,7 @@
 FROM python:3.8-slim
 
 WORKDIR /
-COPY bulk_fund_reservation/*.py requirements.txt *.py entrypoint.sh /
+COPY requirements.txt *.py entrypoint.sh /
 
 
 # Fix CVE-2019-25013
@@ -14,8 +14,5 @@ COPY bulk_fund_reservation/*.py requirements.txt *.py entrypoint.sh /
 RUN python -m pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 RUN chmod u+x /entrypoint.sh
-
-ENV S3_BUCKET=NONE \
-    S3_KEY=NONE
 
 ENTRYPOINT [ "/entrypoint.sh" ]
