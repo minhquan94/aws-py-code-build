@@ -25,4 +25,4 @@ phases:
       - echo "Pushing the Docker images $ECR_REPO_URI:$IMAGE_TAG to remote account ECR repo"
       - aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REPO_URI
       - docker push $ECR_REPO_URI:$IMAGE_TAG
-      - echo "Build completed on $(date)"
+      - echo "Build completed on $(date)" 
