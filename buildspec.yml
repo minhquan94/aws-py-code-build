@@ -14,11 +14,12 @@ phases:
     commands:
       - export IMAGE_NAME="aws-py-code-build"
       - export IMAGE_TAG=$(cat version.txt |  sed -n 's/^version=//p')
+      - export ECR_REPO_URI="176595100443.dkr.ecr.eu-west-1.amazonaws.com/aws-py-code-build"
       - docker build --no-cache -t $IMAGE_NAME:$IMAGE_TAG .
       - docker tag $IMAGE_NAME:$IMAGE_TAG $ECR_REPO_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo "Pushing the Docker images $ECR_REPO_URI:$IMAGE_TAG to remote account ECR repo"
-      - aws ecr get-login-password | docker login --username tyme-ecs-user --password-stdin $ECR_REPO_URI
+      - aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REPO_URI
       - docker push $ECR_REPO_URI:$IMAGE_TAG
       - echo "Build completed on $(date)"
