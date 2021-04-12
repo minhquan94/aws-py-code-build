@@ -33,6 +33,3 @@ phases:
       - aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REPO_URI
       - docker push $ECR_REPO_URI:$IMAGE_TAG
       - echo "Build completed on $(date)"
-# cache:
-#   paths:
-#     - '/root/.m2/**/*'
